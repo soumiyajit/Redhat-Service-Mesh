@@ -1,0 +1,10 @@
+apiVersion: "networking.istio.io/v1alpha3"
+kind: "DestinationRule"
+metadata:
+  name: "hello-istio"
+  namespace: istio-system
+spec:
+  host: hello-istio.hello-istio.svc.cluster.local 
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL

@@ -1,0 +1,41 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: hello-message-http-policy
+  namespace: hello-istio
+spec:
+  selector:
+    matchLabels:
+      app: hello-message
+  # toggle between DENY and ALLOW
+  action: DENY
+  rules:
+  - to:
+      - operation:
+          methods: ["GET"]
+    from:
+      - source:
+          namespaces:
+            - hello-istio
+
+---
+
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: hello-istio-http-policy
+  namespace: hello-istio
+spec:
+  selector:
+    matchLabels:
+      app: hello-istio
+  # toggle between DENY and ALLOW
+  action: DENY
+  rules:
+  - to:
+      - operation:
+          methods: ["GET"]
+    from:
+      - source:
+          namespaces:
+            - hello-istio

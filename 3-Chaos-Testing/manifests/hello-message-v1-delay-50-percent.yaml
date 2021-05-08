@@ -1,0 +1,34 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: hello-message
+spec:
+  hosts:
+  - hello-message
+  http:
+  - fault:
+      delay:
+        percentage:
+          value: 80
+        fixedDelay: 5s
+    route:
+    - destination:
+        host: hello-message
+        subset: v1
+  - route:
+    - destination:
+        host: hello-message
+        subset: v2
+
+
+
+
+
+
+
+
+
+
+
+
+        

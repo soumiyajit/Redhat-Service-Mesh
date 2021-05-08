@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-istio-secure
+  namespace: hello-istio
+spec:
+  selector:
+    matchLabels:
+      app: hello-istio-secure
+  replicas: 1
+  template:
+    metadata:
+      annotations: 
+        sidecar.istio.io/inject: "true" 
+      labels:
+        app: hello-istio-secure
+    spec:
+      containers:
+      - name: tcpdump
+        image: corfr/tcpdump
+          - /bin/sleep
+          - infinity
